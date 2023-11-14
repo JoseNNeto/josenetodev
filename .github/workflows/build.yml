@@ -37,6 +37,6 @@ jobs:
         with:
           # Build directory to deploy
           target_branch: main
-          build_dir: /build
+          build_dir: /josenetodev
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
