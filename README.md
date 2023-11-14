@@ -1,3 +1,7 @@
+---
+layout: none
+---
+
 # Me inspirei no Simplefolio ⚡️ 
 ## A minimal portfolio template for Developers!
 
