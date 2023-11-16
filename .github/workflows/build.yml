@@ -5,16 +5,47 @@ run-name: ${{ github.actor }} is learning GitHub Actions
 on: [push]
 
 jobs:
-  instalar-dependencias:
+  build-run:
     
     runs-on: ubuntu-latest
 
     steps:
 
-      - uses: actions/checkout@v4
+      - name: Git Checkout
+        uses: actions/checkout@v4
       
-      - uses: actions/setup-node@v3
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3
 
-      - run: npm install
+      - name: Install Dependencies 
+        run: npm install
 
-      - run: npm start
+      - name: Build Parcel project
+        run: npx parcel build
+
+      - name: Install Bootstrap dependencies
+        run: npm install bootstrap
+
+      - name: Compile Sass files
+        run: sass --output-style compressed sass/*.scss > sass/styles.css
+
+      - name: Install ScrollReveal.js
+        run: npm install scrollreveal
+
+      - name: Install Tilt.js
+        run: npm install tilt-js
+
+      - name: Fix permissions
+        run: |
+          chmod -c -R +rX "_site/" | while read line; do
+            echo "::warning title=Invalid file permissions automatically fixed::$line"
+          done
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v2
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-to-pages@v3
+        with:
+          gh-token: ${{ secrets.GITHUB_TOKEN }}
+          publish-branch: gh-pages
+          public: true
