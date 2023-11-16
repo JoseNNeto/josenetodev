@@ -1,4 +1,4 @@
-name: deploy-portfolio
+name: build
 
 run-name: ${{ github.actor }} is learning GitHub Actions
 
