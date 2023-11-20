@@ -5,8 +5,13 @@
   "description": "A clean, beautiful and responsive portfolio template for Developers!",
   "source": "src/index.html",
   "scripts": {
-    "start": "parcel",
-    "build": "parcel build"
+    "start": "parcel src/index.html",
+    "build:parcel": "parcel build src/index.html --public-url /josenetodev",
+    "build": "npm run clean:windows && npm run build:parcel",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
+    "clean:windows": "rmdir /s /q dist"
+
   },
   "repository": {
     "type": "git",
@@ -21,6 +26,7 @@
   "homepage": "https://github.com/cobiwave/simplefolio#readme",
   "devDependencies": {
     "@parcel/transformer-sass": "^2.10.2",
+    "gh-pages": "^6.1.0",
     "parcel": "^2.10.2",
     "prettier": "^2.8.1"
   },
